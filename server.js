@@ -50,6 +50,28 @@ app.post('/api/customers', async (req, res) => {
 });
 
 //TODO: PUT all customers
+app.put('/api/customers/:id', async (req, res) => {
+    try {
+        //read parameters
+        const { id } = req.params;
+        console.log(req.body)
+        console.log(req.body.name)
+        //connect to client
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        //update customer
+        const result = await collection.updateOne({_id: new ObjectId(id)},{$set:{name: req.body.name, email: req.body.email, password: req.body.password}});
+
+        res.sendStatus(201);
+        console.log('Updating user:', id);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send("Something went wrong.... :(");
+    }
+});
+
 
 //TODO: DELETE all customers
 app.delete('/api/customers/:id', async (req, res) => {
