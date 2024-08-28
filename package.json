@@ -13,8 +13,13 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongo": "^0.1.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.4"
   },
+<<<<<<< HEAD
   "type": "module"
+=======
+  "type" : "module"
+>>>>>>> 35a6b5f1f1bb733c9d04f2f63774916b6a24ea6d
 }
