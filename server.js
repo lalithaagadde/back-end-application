@@ -9,9 +9,12 @@ const dbName = process.env.MONGO_DB;
 const collectionName = process.env.MONGO_DB_COLLECTION;
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 const PORT = process.env.PORT;
 
+
+//GET all customers
 app.get('/api/customers', async (req, res)=>{
     try {
         const client = await MongoClient.connect(url);
@@ -19,7 +22,6 @@ app.get('/api/customers', async (req, res)=>{
         const collection = db.collection(collectionName);
         const customers = await collection.find({}).toArray();
         res.json(customers);
-        console.log(customers);
 
     } catch(error) {
         console.log("Error: ", error);
@@ -27,6 +29,7 @@ app.get('/api/customers', async (req, res)=>{
     }
 })
 
+//TODO: POST all customers
 app.post('/api/customers', async (req, res) => {
     try {
         const client = await MongoClient.connect(url);
@@ -34,16 +37,21 @@ app.post('/api/customers', async (req, res) => {
         const collection = db.collection(collectionName);
         
         // Insert a new customer
+        console.log(req.body);
         const result = await collection.insertOne(req.body);
         
-        res.status(201).json(result.ops[0]);
-        console.log("New customer added:", result.ops[0]);
+        res.sendStatus(201);
+        console.log("New customer added!");
 
     } catch(error) {
         console.log("Error: ", error);
         res.status(500).send("Something went wrong.... :(");
-    }
+    } 
 });
+
+//TODO: PUT all customers
+
+//TODO: DELETE all customers
 
 
 // Start the server
