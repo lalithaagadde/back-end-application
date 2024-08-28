@@ -52,6 +52,24 @@ app.post('/api/customers', async (req, res) => {
 //TODO: PUT all customers
 
 //TODO: DELETE all customers
+app.delete('/api/customers/:id', async (req, res) => {
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+        
+        // Insert a new customer
+        console.log(req.params.id);
+        const result = await collection.deleteOne({ _id: new ObjectId(req.params.id) });
+        
+        res.sendStatus(201);
+        console.log("New customer added!");
+
+    } catch(error) {
+        console.log("Error: ", error);
+        res.status(500).send("Something went wrong.... :(");
+    } 
+});
 
 
 // Start the server
