@@ -17,9 +17,5 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.4"
   },
-<<<<<<< HEAD
   "type": "module"
-=======
-  "type" : "module"
->>>>>>> 35a6b5f1f1bb733c9d04f2f63774916b6a24ea6d
 }
